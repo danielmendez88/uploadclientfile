@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h1 class="display-4">Subir Archivos!</h1>
+  <p class="lead">Esta aplicación te permite subir archivos al servidor desde una Api Rest</p>
+  <hr class="my-4">
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit(uploadForm.value)">
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Cargar Imagen</label>
+      <input type="file" class="form-control-file" name="inputFile" formControlName="inputFile" id="inputFile" (change)="onSelectedFile($event)" [ngClass]="{ 'is-invalid': submitted && f.inputFile.errors }">
+      <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+        <div *ngIf="f.inputFile.errors.required">Archivo Requerido</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Subir</button>
+  </form>
+  <hr class="my-4">
+  <div *ngFor="let item of getFilesAll">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ item.rutaArchivo }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.nombreArchivo }}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Detalles</a>
+      </div>
+    </div>
+    <hr class="my-4">
+  </div>
+</div>
